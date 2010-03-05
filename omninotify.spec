@@ -14,6 +14,8 @@ URL:		http://omninotify.sourceforge.net
 Source0:	omniNotify-2.1.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
+BuildRequires:	omniorb-devel
+
 Patch0:		long-long.patch
 Patch1:		backward-iostream.patch
 Patch2:		destdir.patch
