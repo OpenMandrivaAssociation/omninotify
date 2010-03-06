@@ -16,6 +16,8 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 BuildRequires:	omniorb
 BuildRequires:	omniorb-devel
+BuildRequires:	python-omniidl
+BuildRequires:	python-omniorb
 
 Patch0:		long-long.patch
 Patch1:		backward-iostream.patch
