@@ -6,7 +6,7 @@
 
 Name:		%{name}
 Version:	2.1
-Release:	%mkrel 1
+Release:	%mkrel 2
 Group:		System/Servers
 Summary:	Multi-threaded implementation of the CORBA Notification Service
 License:	GPL
@@ -65,6 +65,7 @@ Summary:	%{name} shared libraries
 Group:		Development/Other
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
 
 %description	-n %{devname}
 This package provides %{name} development files.
