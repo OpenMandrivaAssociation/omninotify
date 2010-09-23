@@ -1,5 +1,3 @@
-%define		_disable_ld_no_undefined	1
-
 %define	name	omninotify
 %define	libname	%mklibname %{name} 0
 %define devname	%mklibname %{name} -d
@@ -88,11 +86,12 @@ This package provides %{name} development files.
 
 #-----------------------------------------------------------------------
 %build
-%configure --disable-static --enable-shared
+%configure2_5x --disable-static --enable-shared
 %make
 
 #-----------------------------------------------------------------------
 %install
+rm -rf %{buildroot}
 %makeinstall_std
 
 #-----------------------------------------------------------------------
