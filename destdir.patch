@@ -1,0 +1,63 @@
+diff -p -up omniNotify/mkattlib/dir.mk.orig omniNotify/mkattlib/dir.mk
+--- omniNotify/mkattlib/dir.mk.orig	2010-03-05 19:21:42.722485625 -0300
++++ omniNotify/mkattlib/dir.mk	2010-03-05 19:21:52.763482151 -0300
+@@ -44,7 +44,7 @@ export:: $(ATTN_INTERFACES:%=%.hh) ATTN_
+ 
+ ifdef INSTALLTARGET
+ install:: $(ATTN_INTERFACES:%=%.hh) ATTN_sysdep.h
+-	@(dir="$(INSTALLINCDIR)/COS"; \
++	@(dir="$(DESTDIR)$(INSTALLINCDIR)/COS"; \
+           for file in $^; do \
+             $(ExportFileToDir) \
+           done )
+diff -p -up omniNotify/mk/beforeauto.mk.in.orig omniNotify/mk/beforeauto.mk.in
+--- omniNotify/mk/beforeauto.mk.in.orig	2010-03-05 19:41:04.601486207 -0300
++++ omniNotify/mk/beforeauto.mk.in	2010-03-05 19:41:50.805753722 -0300
+@@ -390,7 +390,7 @@ endef
+ endif
+ 
+ define InstallLibrary
+-(dir="$(INSTALLLIBDIR)"; \
++(dir="$(DESTDIR)$(INSTALLLIBDIR)"; \
+  $(ExportLibraryToDir) \
+ )
+ endef
+@@ -440,7 +440,7 @@ endef
+ endif
+ 
+ define InstallExecutable
+-(dir="$(INSTALLBINDIR)"; \
++(dir="$(DESTDIR)$(INSTALLBINDIR)"; \
+  files="$^"; \
+  for file in $$files; do \
+    $(ExportExecutableFileToDir); \
+@@ -449,7 +449,7 @@ define InstallExecutable
+ endef
+ 
+ define UninstallExecutable
+-(dir="$(INSTALLBINDIR)"; \
++(dir="$(DESTDIR)$(INSTALLBINDIR)"; \
+  files="$^"; \
+  for file in $$files; do \
+    $(RemoveFileFromDir); \
+@@ -623,7 +623,7 @@ define ExportSharedLibrary
+ endef
+ 
+ define InstallSharedLibrary
+- dir="$(INSTALLLIBDIR)"; \
++ dir="$(DESTDIR)$(INSTALLLIBDIR)"; \
+  $(ExportSharedLibraryToDir)
+ endef
+ 
+diff -p -up omniNotify/include/GNUmakefile.in.orig omniNotify/include/GNUmakefile.in
+--- omniNotify/include/GNUmakefile.in.orig	2010-03-05 19:43:03.723485924 -0300
++++ omniNotify/include/GNUmakefile.in	2010-03-05 19:43:17.695490752 -0300
+@@ -4,7 +4,7 @@ BASE_OMNI_TREE=@top_srcdir@
+ VPATH=@srcdir@
+ INSTALL=@INSTALL@
+ 
+-INSTALLDIR = $(INSTALLINCDIR)/omniNotify
++INSTALLDIR = $(DESTDIR)$(INSTALLINCDIR)/omniNotify
+ 
+ HEADERS = corba_wrappers.h corba_wrappers_impl.h			\
+ CosEventChannelAdmin_i.h CosNfyUtils.h CosNotification_i.h		\

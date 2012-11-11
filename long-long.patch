@@ -1,0 +1,57 @@
+diff -p -up omniNotify/include/RDIstrstream.h.orig omniNotify/include/RDIstrstream.h
+--- omniNotify/include/RDIstrstream.h.orig	2010-03-05 17:00:31.811481172 -0300
++++ omniNotify/include/RDIstrstream.h	2010-03-05 17:02:39.594482084 -0300
+@@ -61,7 +61,7 @@ public:
+   RDIstrstream& operator<<(unsigned long n);
+   RDIstrstream& operator<<(short n) {return operator<<((int)n);}
+   RDIstrstream& operator<<(unsigned short n) {return operator<<((unsigned int)n);}
+-#ifdef HAS_LongLong
++#if defined(HAS_LongLong) && __WORDSIZE == 32
+   RDIstrstream& operator<<(WRAPPED_CORBA_LONGLONG_TYPE n);
+   RDIstrstream& operator<<(WRAPPED_CORBA_ULONGLONG_TYPE n);
+ #endif
+diff -p -up omniNotify/lib/RDIstrstream.cc.orig omniNotify/lib/RDIstrstream.cc
+--- omniNotify/lib/RDIstrstream.cc.orig	2010-03-05 17:01:35.891484955 -0300
++++ omniNotify/lib/RDIstrstream.cc	2010-03-05 17:02:57.040482933 -0300
+@@ -195,7 +195,7 @@ RDIstrstream::operator<<(unsigned long n
+   return *this;
+ }
+ 
+-#ifdef HAS_LongLong
++#if defined(HAS_LongLong) && __WORDSIZE == 32
+ RDIstrstream&
+ RDIstrstream::operator<<(WRAPPED_CORBA_LONGLONG_TYPE n)
+ {
+diff -p -up omniNotify/include/RDITimeWrappers.h.orig omniNotify/include/RDITimeWrappers.h
+--- omniNotify/include/RDITimeWrappers.h.orig	2010-03-05 18:15:35.379481643 -0300
++++ omniNotify/include/RDITimeWrappers.h	2010-03-05 18:16:33.337493672 -0300
+@@ -235,7 +235,7 @@ public:
+ 
+   // pretty-printing of absolute local time -- no newline
+   void out_local(RDIstrstream& str) {
+-    CORBA::ULong ts, tn;
++    unsigned long ts, tn;
+     get_posixbase_secs_nanosecs(ts, tn);
+     RDI_posixbase_out_time(str, ts, tn);
+     str << " (local time)";
+@@ -395,7 +395,7 @@ public:
+   }
+   // pretty-printing of absolute univ time -- no newline
+   void out_gmt(RDIstrstream& str) {
+-    CORBA::ULong ts, tn;
++    unsigned long ts, tn;
+     get_gmt_posixbase_secs_nanosecs(ts, tn);
+     RDI_posixbase_out_time(str, ts, tn);
+     str << " (greenwich mean time)";
+diff -p -up omniNotify/lib/RDITimeWrappers.cc.orig omniNotify/lib/RDITimeWrappers.cc
+--- omniNotify/lib/RDITimeWrappers.cc.orig	2003-10-23 02:39:12.000000000 -0200
++++ omniNotify/lib/RDITimeWrappers.cc	2010-03-05 18:45:43.486506108 -0300
+@@ -146,7 +146,7 @@ static int RDI_TimeT_fmt_local_buf_idx =
+ #undef WHATFN
+ #define WHATFN "RDI_TimeT::fmt_local"
+ const char *RDI_TimeT::fmt_local() {
+-  CORBA::ULong ts, tm;
++  unsigned long ts, tm;
+   get_posixbase_secs_msecs(ts, tm);
+   time_t secs_as_time_t = ts;
+   TW_SCOPE_LOCK(otime_lock, RDI_out_time_lock, "RDI_out_time", WHATFN);
