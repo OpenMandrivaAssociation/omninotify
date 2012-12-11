@@ -1,3 +1,5 @@
+%define		_disable_ld_no_undefined	1
+
 %define	name	omninotify
 %define	libname	%mklibname %{name} 0
 %define devname	%mklibname %{name} -d
@@ -86,14 +88,25 @@ This package provides %{name} development files.
 
 #-----------------------------------------------------------------------
 %build
-%configure2_5x --disable-static --enable-shared
+%configure --disable-static --enable-shared
 %make
 
 #-----------------------------------------------------------------------
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 #-----------------------------------------------------------------------
 %clean
 rm -rf %{buildroot}
+
+
+%changelog
+* Thu Sep 23 2010 Funda Wang <fwang@mandriva.org> 2.1-2mdv2011.0
++ Revision: 580665
+- adding missing requires
+
+* Sat Mar 06 2010 Paulo Andrade <pcpa@mandriva.com.br> 2.1-1mdv2010.1
++ Revision: 514881
+- Import omninotify version 2.1.
+- omninotify
+
