@@ -6,7 +6,7 @@
 
 Name:		%{name}
 Version:	2.1
-Release:	%mkrel 2
+Release:	3
 Group:		System/Servers
 Summary:	Multi-threaded implementation of the CORBA Notification Service
 License:	GPL
