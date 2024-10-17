@@ -10,7 +10,7 @@ Release:	3
 Group:		System/Servers
 Summary:	Multi-threaded implementation of the CORBA Notification Service
 License:	GPL
-URL:		http://omninotify.sourceforge.net
+URL:		https://omninotify.sourceforge.net
 Source0:	omniNotify-2.1.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
